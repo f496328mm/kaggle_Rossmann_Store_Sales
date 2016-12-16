@@ -12,7 +12,7 @@ Second , donwload my code and install packages
 
 Third , change setwd to your data location in main code
 
-Fourth , run my code function before run main
+Fourth , run function before run main
 
 If any question , give me a message or others
 
