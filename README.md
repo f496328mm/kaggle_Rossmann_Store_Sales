@@ -6,7 +6,7 @@ This code Score is kaggle NO.398, i will do better
 
 https://www.kaggle.com/c/rossmann-store-sales
 
-First , download train.csv and test.csv on kaggle
+First , download train.csv , test.csv and store.csv on kaggle
 
 Second , donwload my code and install packages
 
