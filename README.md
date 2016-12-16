@@ -1,6 +1,6 @@
 # kaggle_Rossmann_Store_Sales
 
-I use R.
+( this is R code )
 
 This code Score is kaggle NO.398, i will do better
 
