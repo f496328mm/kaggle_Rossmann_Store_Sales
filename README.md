@@ -1,5 +1,7 @@
 # kaggle_Rossmann_Store_Sales
 
+I use R.
+
 This code Score is kaggle NO.398, i will do better
 
 https://www.kaggle.com/c/rossmann-store-sales
