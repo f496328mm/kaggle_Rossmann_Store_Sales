@@ -2,7 +2,7 @@
 
 ( this is R code )
 
-This code Score is kaggle NO.398, i will do better
+This code Score is kaggle NO.315, i will do better
 
 https://www.kaggle.com/c/rossmann-store-sales
 
