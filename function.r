@@ -31,6 +31,7 @@ work.train.test.map.fun2=function(n,amount){
 	n2=num[-n1]
 	return(list(n1,n2))
 }
+
 work.train.data.fun=function(test2){
 
 	temp	 = work.train.test.map.fun2( nrow(test2),2000000 )
@@ -81,81 +82,6 @@ xgb.fun=function(train,test3,nro,eta=0.1,md=10,cb=0.5,start,ss,npt){
 	return( list( c(value1,value2 ) , clf ) )
 }
 
-bind.var.main.test.fun = 
-	function(main.test,
-		mean.sale.store,				mean.sale.weekday	,	
-		mean.sale.promo,				mean.sale.month 	,	
-		mean.sale.day,				mean.sale.school.h,
-		mean.sale.StoreType,			mean.sale.Assortment	,
-		mean.sale.cd,	mean.sale.promo2,
-		mean.sale.store.weekday, 		mean.sale.store.promo	,
-		mean.sale.store.month,		mean.sale.store.day 	,
-		mean.sale.store.school.h,		mean.sale.store.StoreType,	
-		mean.sale.store.Assortment,	mean.sale.store.cd,	
-		mean.sale.store.promo2,		mean.sale.swpm,		
-		mean.sale.swpm.st.sc,			sd.sale.swpm.st.sc,
-		mean.sale.co,					mean.sale.store.co,
-		mean.sale.p2sy,				mean.sale.pi,
-		mean.sale.sdm,				ppp,
-		mean.cus.sdpm,				mean.sale.year,
-		mean.sale.sy){
-				
-	main.test = merge(main.test , mean.sale.store, all.x = TRUE, by = c("Store"))
-	main.test = merge(main.test , mean.sale.weekday, all.x = TRUE, by = c("DayOfWeek"))
-	main.test = merge(main.test , mean.sale.promo, all.x = TRUE, by = c("Promo"))
-
-	main.test = merge(main.test , mean.sale.month, all.x = TRUE, by = c("month"))
-	main.test = merge(main.test , mean.sale.day, all.x = TRUE, by = c("day"))
-	main.test = merge(main.test , mean.sale.school.h, all.x = TRUE, by = c("SchoolHoliday"))
-
-	main.test = merge(main.test , mean.sale.StoreType, all.x = TRUE, by = c("StoreType"))
-	main.test = merge(main.test , mean.sale.Assortment, all.x = TRUE, by = c("Assortment"))
-	main.test = merge(main.test , mean.sale.cd, all.x = TRUE, by = c("CompetitionDistance"))
-	main.test = merge(main.test , mean.sale.promo2, all.x = TRUE, by = c("Promo2"))
-
-	main.test = merge(main.test , mean.sale.co, all.x = TRUE, by = c("CompetitionOpenSinceYear"))
-	main.test = merge(main.test , mean.sale.p2sy, all.x = TRUE, by = c("Promo2SinceYear"))
-
-	main.test = merge(main.test , mean.sale.pi, all.x = TRUE, by = c("PromoInterval"))
-
-	main.test = merge(main.test , mean.sale.year, all.x = TRUE, by = c("year"))
-	#--------------------------------------------------------------------------------------------
-	main.test = merge(main.test , mean.sale.store.weekday, all.x = TRUE, by = c("Store","DayOfWeek"))
-	main.test = merge(main.test , mean.sale.store.promo, all.x = TRUE, by = c("Store","Promo"))
-
-	main.test = merge(main.test , mean.sale.store.month, all.x = TRUE, by = c("Store","month"))
-	main.test = merge(main.test , mean.sale.store.day, all.x = TRUE, by = c("Store","day"))
-	main.test = merge(main.test , mean.sale.store.school.h, all.x = TRUE, by = c("Store","SchoolHoliday"))
-
-	main.test = merge(main.test , mean.sale.store.StoreType, all.x = TRUE, by = c("Store","StoreType"))
-	main.test = merge(main.test , mean.sale.store.Assortment, all.x = TRUE, by = c("Store","Assortment"))
-	main.test = merge(main.test , mean.sale.store.cd, all.x = TRUE, by = c("Store","CompetitionDistance"))
-	main.test = merge(main.test , mean.sale.store.promo2, all.x = TRUE, by = c("Store","Promo2"))
-	main.test = merge(main.test , mean.sale.store.co, all.x = TRUE, by = c("Store","CompetitionOpenSinceYear"))
-
-	main.test = merge(main.test , mean.sale.sy, all.x = TRUE, by = c("Store","year"))
-	#--------------------------------------------------------------------------------------------
-
-	#main.test = merge(main.test , mean.sale.sdm, all.x = TRUE, by = c("Store","DayOfWeek","month"))
-	main.test = merge(main.test , ppp, all.x = TRUE, by = c("Store"))
-
-	main.test = merge(main.test , mean.cus.sdpm , all.x = TRUE, 
-		by = c("Store","DayOfWeek","Promo","month"))
-
-	#--------------------------------------------------------------------------------------------
-
-	main.test = merge(main.test , mean.sale.swpm, all.x = TRUE, 
-			by = c("Store","DayOfWeek","Promo","month"))
-
-	main.test = merge(main.test , mean.sale.swpm.st.sc, all.x = TRUE, 
-			by = c("Store","DayOfWeek","month","Promo","StateHoliday","SchoolHoliday"))
-
-	#main.test = merge(main.test , sd.sale.swpm.st.sc, all.x = TRUE, 
-	#		by = c("Store","DayOfWeek","month","Promo","StateHoliday","SchoolHoliday"))
-
-	return(main.test)
-}
-
 work.model.fun2=function(main.train.y,
 			sample.amount,test){
 
@@ -172,7 +98,6 @@ work.model.fun2=function(main.train.y,
 	#----------------------------------------------------------------
 	return(list(c(v1),model1))
 }
-
 
 work.var.fun=function(main.train.x){
 
@@ -272,7 +197,6 @@ work.var.fun=function(main.train.x){
 	) )
 }
 
-
 pred.fun=function(main.train.x,main.train.y,main.test3){
 	#--------------------------------------------------------------------------------------------
 	#生變數
@@ -344,12 +268,18 @@ pred.fun=function(main.train.x,main.train.y,main.test3){
 			mean.sale.tompro,	
 			mean.sale.fir)
 	#--------------------------------------------------------------------------------------------
+	#xgb model
 	sample.amount = nrow(main.train.y)
 	temp2 = work.model.fun2(main.train.y,sample.amount,
 			test)
 	print( temp2[[1]] )
+	model.xgb=temp2[[2]]
+	#----------------------------------------------------------
+	#glmnet model
+	temp = work.glmnet.model.fun(test)
 
-	model=temp2[[2]]
+	model.glmnet = temp[[1]]
+	print(temp[[2]])
 	#-----------------------------------------------------------------
 	#模型生好了   接下來是預測
 	#--------------------------------------------------------------------------------------------
@@ -381,20 +311,18 @@ pred.fun=function(main.train.x,main.train.y,main.test3){
 			mean.sale.tompro,	
 			mean.sale.fir	)
 
-	pred1<-predict(model,xgb.DMatrix(data.matrix(
-					pred.data[,c(26:ncol(pred.data)),with=FALSE]),
-					missing=NA))
-	pred1.log = exp( pred1 )-5
-	pred1.log = as.integer(round(pred1.log))
+	result.glmnet = work.finish.pred.fun(model.glmnet,model.xgb,pred.data,1)
+	result.glmnet$Sales = round( result.glmnet$Sales*0.968 , digits=0)
+	result.xgb = work.finish.pred.fun(model.glmnet,model.xgb,pred.data,2)
 
-	result1 = data.table(	Id=pred.data$Id,Open=pred.data$Open,
-						Sales=pred1.log)
-	
-	result1[result1$Open==0,3]=0
-	result1=result1[,.(Id,Sales)]
+	result3 = result.glmnet[,.(Id)]
 
-	return((result1))
+	result3$Sales = 
+	round( ( result.glmnet$Sales + result.xgb$Sales )*0.5 , digits = 0)
+
+	return(result3)
 }
+
 
 month.day.train.fun=function(main.train){
 
@@ -457,7 +385,6 @@ month.day.test.fun=function(main.test){
 
 	return(main.test)
 }
-
 
 work.test.fun=function(bo,main.test,main.train.y,
 			sample.amount,
@@ -615,6 +542,74 @@ first.fun=function(data2,i){
 		}
 	}
 	return(first)
+}
+
+work.finish.pred.fun=function(model.glmnet,model.xgb,pred.data,bo){
+
+	#分割data , open=0 直接預測為0 
+	pred.data1=filter(pred.data,Open==1)
+	pred.data0=filter(pred.data,Open==0)
+	pred.data0$Sales=0
+
+	x=as.matrix(pred.data1[,26:ncol(pred.data1),with=F])
+	if(bo==1){
+		pred <-predict(	
+						model.glmnet, s=0 , 
+						x,type="response")
+	}else if(bo==2){
+		pred<-predict(model.xgb,xgb.DMatrix(data.matrix(
+				pred.data1[,c(26:ncol(pred.data1)),with=FALSE]),
+				missing=NA))
+	}
+
+	pred.log = exp( pred )-5
+	pred.log = as.integer(round(pred.log))
+
+	result1 = data.table( Id=pred.data1$Id,
+						Sales=pred.log)
+	result3 = 
+	rbind( result1,pred.data0[,.(Id,Sales)] ) %>%
+	arrange(Id)
+
+	return((result3))
+}
+
+work.glmnet.model.fun=function(test){
+
+	set.seed(100)
+	temp = work.train.data.fun( test )
+	train=temp[[1]]
+
+	train2 = train[,28:ncol(train),with=F]
+
+	#補na
+	set.seed(100)
+	fix.train2 = data.table( complete( 
+				mice( train2, m = 5,
+				defaultMethod = c("pmm","logreg"), maxit = 2 ) 
+				) )
+
+	sum( is.na(fix.train2) )
+	colnames(fix.train2)
+	x=fix.train2[,2:ncol(fix.train2),with=F]
+	y=train$log.sale
+	y2=train$Sales
+	ncol(x)
+	
+	model = 	glmnet(as.matrix(x) , y 
+		        ,family = c("poisson")
+		        ,alpha = 0.005
+		        ,nlambda = 5
+		        ,standardize = FALSE
+		        ,maxit=100000
+			    )
+
+	pred1<-predict(model, s=0, as.matrix(x), type="response")
+	pred1.log = exp( pred1 )-5
+
+	value1 = RMSPE(y2,pred1.log)
+	value1
+	return( list( model,value1) )
 }
 
 
