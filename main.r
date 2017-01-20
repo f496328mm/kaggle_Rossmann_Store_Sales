@@ -7,19 +7,20 @@
 	#install.packages("glmnet")
 	#install.packages("dplyr")
 	#install.packages("moments")
+	#install.packages("mice")
 
 	library(data.table)
 	library(xgboost)
 	library(snow)
-	library(xlsx)
 	library(glmnet)
 	library(dplyr)
 	library(moments)
 	library(mice)
-	library(e1071)
-
-
-	setwd("g:\\kaggle3")
+	
+	# windows
+	#setwd("g:\\kaggle3")
+	# linux
+	setwd("/media/linsam/74D2F8C6D2F88D9C/kaggle3")
 
 	main.train=fread("train.csv")
 	main.test=fread("test.csv")
