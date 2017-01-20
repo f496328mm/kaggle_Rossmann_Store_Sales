@@ -83,22 +83,22 @@ xgb.fun=function(train,test3,nro,eta=0.1,md=10,cb=0.5,start,ss,npt){
 }
 
 work.model.fun2=function(main.train.y,
-			sample.amount,test){
-
-	#----------------------------------------------------------------
-	set.seed(100)
-	temp = work.train.data.fun( test )
-	train=temp[[1]]
-	test3=temp[[2]]
- 	set.seed(100)
-	value = xgb.fun(train,test3,51,0.1,18,0.45,29,1,9)
-	(v1=value[[1]])
-
-	model1=value[[2]]
-	#----------------------------------------------------------------
-	return(list(c(v1),model1))
+                         sample.amount,test){
+  
+  #----------------------------------------------------------------
+  set.seed(100)
+  temp = work.train.data.fun( test )
+  train=data.table( temp[[1]] )
+  test3=data.table( temp[[2]] )
+  set.seed(100)
+  value = xgb.fun(train,test3,51,0.1,18,0.45,29,1,9)
+  (v1=value[[1]])
+  
+  model1=value[[2]]
+  #----------------------------------------------------------------
+  return(list(c(v1),model1))
 }
-
+	
 work.var.fun=function(main.train.x){
 
 	main.train.x$log.sale	= log( main.train.x$Sales +5)	#sale
@@ -198,131 +198,134 @@ work.var.fun=function(main.train.x){
 }
 
 pred.fun=function(main.train.x,main.train.y,main.test3){
-	#--------------------------------------------------------------------------------------------
-	#生變數
-	main.train.y$log.sale=log(main.train.y$Sales+5)
-	temp = work.var.fun(main.train.x)
-	mean.sale.store				=temp[[1]]			
-	mean.sale.weekday				=temp[[2]]	
-	mean.sale.promo				=temp[[3]]				
-	mean.sale.month 				=temp[[4]]
-	mean.sale.day					=temp[[5]]				
-	mean.sale.school.h			=temp[[6]]
-	mean.sale.StoreType			=temp[[7]]			
-	mean.sale.Assortment			=temp[[8]]
-	mean.sale.cd					=temp[[9]]
-	mean.sale.promo2				=temp[[10]]
-	mean.sale.store.weekday		=temp[[11]]		
-	mean.sale.store.promo			=temp[[12]]
-	mean.sale.store.month			=temp[[13]]
-	mean.sale.store.day 			=temp[[14]]
-	mean.sale.store.school.h		=temp[[15]]
-	mean.sale.store.StoreType		=temp[[16]]
-	mean.sale.store.Assortment		=temp[[17]]
-	mean.sale.store.cd			=temp[[18]]
-	mean.sale.store.promo2		=temp[[19]]
-	mean.sale.swpm				=temp[[20]]
-	mean.sale.swpm.st.sc			=temp[[21]]
-	sd.sale.swpm.st.sc			=temp[[22]]
-	mean.sale.co					=temp[[23]]
-	mean.sale.store.co			=temp[[24]]
-	mean.sale.p2sy				=temp[[25]]
-	mean.sale.pi					=temp[[26]]
-	mean.sale.sdm					=temp[[27]]
-	ppp							=temp[[28]]
-	mean.cus.sdpm					=temp[[29]]
-	mean.sale.year				=temp[[30]]
-	mean.sale.sy					=temp[[31]]
-	mean.sale.swc					=temp[[32]]
-	open.rate					=temp[[33]]
-	mean.sale.yesop				=temp[[34]]		
-	mean.sale.tomop				=temp[[35]]		
-	mean.sale.yespro				=temp[[36]]		
-	mean.sale.tompro				=temp[[37]]	
-	mean.sale.fir					=temp[[38]]	
-	
-	gc()
-	#--------------------------------------------------------------------------------------------
-	test = work.test.fun(1,main.test,main.train.y,
-			sample.amount,
-			mean.sale.store,				mean.sale.weekday	,	
-			mean.sale.promo,				mean.sale.month 	,	
-			mean.sale.day,				mean.sale.school.h,
-			mean.sale.StoreType,			mean.sale.Assortment	,
-			mean.sale.cd,	mean.sale.promo2,
-			mean.sale.store.weekday, 		mean.sale.store.promo	,
-			mean.sale.store.month,		mean.sale.store.day 	,
-			mean.sale.store.school.h,		mean.sale.store.StoreType,	
-			mean.sale.store.Assortment,	mean.sale.store.cd,	
-			mean.sale.store.promo2,		mean.sale.swpm,		
-			mean.sale.swpm.st.sc,			sd.sale.swpm.st.sc,
-			mean.sale.co,					mean.sale.store.co,
-			mean.sale.p2sy,				mean.sale.pi,
-			mean.sale.sdm,				ppp,
-			mean.cus.sdpm,				mean.sale.year,
-			mean.sale.sy,					mean.sale.swc,
-			open.rate,
-			mean.sale.yesop,		
-			mean.sale.tomop,		
-			mean.sale.yespro,		
-			mean.sale.tompro,	
-			mean.sale.fir)
-	#--------------------------------------------------------------------------------------------
-	#xgb model
-	sample.amount = nrow(main.train.y)
-	temp2 = work.model.fun2(main.train.y,sample.amount,
-			test)
-	print( temp2[[1]] )
-	model.xgb=temp2[[2]]
-	#----------------------------------------------------------
-	#glmnet model
-	temp = work.glmnet.model.fun(test)
-
-	model.glmnet = temp[[1]]
-	print(temp[[2]])
-	#-----------------------------------------------------------------
-	#模型生好了   接下來是預測
-	#--------------------------------------------------------------------------------------------
-	#---------------------------------------------------
-	#---------------------------------------------------
-	pred.data = 
-	work.test.fun(0,main.test3,main.train.y,
-			sample.amount,
-			mean.sale.store,				mean.sale.weekday	,	
-			mean.sale.promo,				mean.sale.month 	,	
-			mean.sale.day,				mean.sale.school.h,
-			mean.sale.StoreType,			mean.sale.Assortment	,
-			mean.sale.cd,	mean.sale.promo2,
-			mean.sale.store.weekday, 		mean.sale.store.promo	,
-			mean.sale.store.month,		mean.sale.store.day 	,
-			mean.sale.store.school.h,		mean.sale.store.StoreType,	
-			mean.sale.store.Assortment,	mean.sale.store.cd,	
-			mean.sale.store.promo2,		mean.sale.swpm,		
-			mean.sale.swpm.st.sc,			sd.sale.swpm.st.sc,
-			mean.sale.co,					mean.sale.store.co,
-			mean.sale.p2sy,				mean.sale.pi,
-			mean.sale.sdm,				ppp,
-			mean.cus.sdpm,				mean.sale.year,
-			mean.sale.sy,					mean.sale.swc	,
-			open.rate,
-			mean.sale.yesop,		
-			mean.sale.tomop,		
-			mean.sale.yespro,		
-			mean.sale.tompro,	
-			mean.sale.fir	)
-
-	result.glmnet = work.finish.pred.fun(model.glmnet,model.xgb,pred.data,1)
-	result.glmnet$Sales = round( result.glmnet$Sales*0.968 , digits=0)
-	result.xgb = work.finish.pred.fun(model.glmnet,model.xgb,pred.data,2)
-
-	result3 = result.glmnet[,.(Id)]
-
-	result3$Sales = 
-	round( ( result.glmnet$Sales + result.xgb$Sales )*0.5 , digits = 0)
-
-	return(result3)
+  #--------------------------------------------------------------------------------------------
+  #生變數
+  main.train.y$log.sale=log(main.train.y$Sales+5)
+  main.train.x = data.table(main.train.x)
+  
+  temp = work.var.fun(main.train.x)
+  mean.sale.store				=temp[[1]]			
+  mean.sale.weekday				=temp[[2]]	
+  mean.sale.promo				=temp[[3]]				
+  mean.sale.month 				=temp[[4]]
+  mean.sale.day					=temp[[5]]				
+  mean.sale.school.h			=temp[[6]]
+  mean.sale.StoreType			=temp[[7]]			
+  mean.sale.Assortment			=temp[[8]]
+  mean.sale.cd					=temp[[9]]
+  mean.sale.promo2				=temp[[10]]
+  mean.sale.store.weekday		=temp[[11]]		
+  mean.sale.store.promo			=temp[[12]]
+  mean.sale.store.month			=temp[[13]]
+  mean.sale.store.day 			=temp[[14]]
+  mean.sale.store.school.h		=temp[[15]]
+  mean.sale.store.StoreType		=temp[[16]]
+  mean.sale.store.Assortment		=temp[[17]]
+  mean.sale.store.cd			=temp[[18]]
+  mean.sale.store.promo2		=temp[[19]]
+  mean.sale.swpm				=temp[[20]]
+  mean.sale.swpm.st.sc			=temp[[21]]
+  sd.sale.swpm.st.sc			=temp[[22]]
+  mean.sale.co					=temp[[23]]
+  mean.sale.store.co			=temp[[24]]
+  mean.sale.p2sy				=temp[[25]]
+  mean.sale.pi					=temp[[26]]
+  mean.sale.sdm					=temp[[27]]
+  ppp							=temp[[28]]
+  mean.cus.sdpm					=temp[[29]]
+  mean.sale.year				=temp[[30]]
+  mean.sale.sy					=temp[[31]]
+  mean.sale.swc					=temp[[32]]
+  open.rate					=temp[[33]]
+  mean.sale.yesop				=temp[[34]]		
+  mean.sale.tomop				=temp[[35]]		
+  mean.sale.yespro				=temp[[36]]		
+  mean.sale.tompro				=temp[[37]]	
+  mean.sale.fir					=temp[[38]]	
+  
+  gc()
+  #--------------------------------------------------------------------------------------------
+  test = work.test.fun(1,main.test,main.train.y,
+                       sample.amount,
+                       mean.sale.store,				mean.sale.weekday	,	
+                       mean.sale.promo,				mean.sale.month 	,	
+                       mean.sale.day,				mean.sale.school.h,
+                       mean.sale.StoreType,			mean.sale.Assortment	,
+                       mean.sale.cd,	mean.sale.promo2,
+                       mean.sale.store.weekday, 		mean.sale.store.promo	,
+                       mean.sale.store.month,		mean.sale.store.day 	,
+                       mean.sale.store.school.h,		mean.sale.store.StoreType,	
+                       mean.sale.store.Assortment,	mean.sale.store.cd,	
+                       mean.sale.store.promo2,		mean.sale.swpm,		
+                       mean.sale.swpm.st.sc,			sd.sale.swpm.st.sc,
+                       mean.sale.co,					mean.sale.store.co,
+                       mean.sale.p2sy,				mean.sale.pi,
+                       mean.sale.sdm,				ppp,
+                       mean.cus.sdpm,				mean.sale.year,
+                       mean.sale.sy,					mean.sale.swc,
+                       open.rate,
+                       mean.sale.yesop,		
+                       mean.sale.tomop,		
+                       mean.sale.yespro,		
+                       mean.sale.tompro,	
+                       mean.sale.fir)
+  #--------------------------------------------------------------------------------------------
+  #xgb model
+  sample.amount = nrow(main.train.y)
+  temp2 = work.model.fun2(main.train.y,sample.amount,
+                          test)
+  print( temp2[[1]] )
+  model.xgb=temp2[[2]]
+  #----------------------------------------------------------
+  #glmnet model
+  temp = work.glmnet.model.fun(test)
+  
+  model.glmnet = temp[[1]]
+  print(temp[[2]])
+  #-----------------------------------------------------------------
+  #模型生好了   接下來是預測
+  #--------------------------------------------------------------------------------------------
+  #---------------------------------------------------
+  #---------------------------------------------------
+  pred.data = 
+    work.test.fun(0,main.test3,main.train.y,
+                  sample.amount,
+                  mean.sale.store,				mean.sale.weekday	,	
+                  mean.sale.promo,				mean.sale.month 	,	
+                  mean.sale.day,				mean.sale.school.h,
+                  mean.sale.StoreType,			mean.sale.Assortment	,
+                  mean.sale.cd,	mean.sale.promo2,
+                  mean.sale.store.weekday, 		mean.sale.store.promo	,
+                  mean.sale.store.month,		mean.sale.store.day 	,
+                  mean.sale.store.school.h,		mean.sale.store.StoreType,	
+                  mean.sale.store.Assortment,	mean.sale.store.cd,	
+                  mean.sale.store.promo2,		mean.sale.swpm,		
+                  mean.sale.swpm.st.sc,			sd.sale.swpm.st.sc,
+                  mean.sale.co,					mean.sale.store.co,
+                  mean.sale.p2sy,				mean.sale.pi,
+                  mean.sale.sdm,				ppp,
+                  mean.cus.sdpm,				mean.sale.year,
+                  mean.sale.sy,					mean.sale.swc	,
+                  open.rate,
+                  mean.sale.yesop,		
+                  mean.sale.tomop,		
+                  mean.sale.yespro,		
+                  mean.sale.tompro,	
+                  mean.sale.fir	)
+  
+  result.glmnet = work.finish.pred.fun(model.glmnet,model.xgb,pred.data,1)
+  result.glmnet$Sales = round( result.glmnet$Sales*0.968 , digits=0)
+  result.xgb = work.finish.pred.fun(model.glmnet,model.xgb,pred.data,2)
+  
+  result.glmnet = data.table( result.glmnet )
+  
+  result3 = result.glmnet[,.(Id)]
+  
+  result3$Sales = 
+    round( ( result.glmnet$Sales + result.xgb$Sales )*0.5 , digits = 0)
+  
+  return(result3)
 }
-
 
 month.day.train.fun=function(main.train){
 
@@ -545,71 +548,71 @@ first.fun=function(data2,i){
 }
 
 work.finish.pred.fun=function(model.glmnet,model.xgb,pred.data,bo){
-
-	#分割data , open=0 直接預測為0 
-	pred.data1=filter(pred.data,Open==1)
-	pred.data0=filter(pred.data,Open==0)
-	pred.data0$Sales=0
-
-	x=as.matrix(pred.data1[,26:ncol(pred.data1),with=F])
-	if(bo==1){
-		pred <-predict(	
-						model.glmnet, s=0 , 
-						x,type="response")
-	}else if(bo==2){
-		pred<-predict(model.xgb,xgb.DMatrix(data.matrix(
-				pred.data1[,c(26:ncol(pred.data1)),with=FALSE]),
-				missing=NA))
-	}
-
-	pred.log = exp( pred )-5
-	pred.log = as.integer(round(pred.log))
-
-	result1 = data.table( Id=pred.data1$Id,
-						Sales=pred.log)
-	result3 = 
-	rbind( result1,pred.data0[,.(Id,Sales)] ) %>%
-	arrange(Id)
-
-	return((result3))
+  
+  #分割data , open=0 直接預測為0 
+  pred.data1 = data.table( filter(pred.data,Open==1) )
+  pred.data0 = data.table( filter(pred.data,Open==0) )
+  pred.data0$Sales=0
+  
+  x=as.matrix( pred.data1[,26:ncol(pred.data1),with=F])
+  if(bo==1){
+    pred <-predict(	
+      model.glmnet, s=0 , 
+      x,type="response")
+  }else if(bo==2){
+    pred<-predict(model.xgb,xgb.DMatrix(data.matrix(
+      pred.data1[,c(26:ncol(pred.data1)),with=FALSE]),
+      missing=NA))
+  }
+  
+  pred.log = exp( pred )-5
+  pred.log = as.integer(round(pred.log))
+  
+  result1 = data.table( Id=pred.data1$Id,
+                        Sales=pred.log)
+  result3 = 
+    rbind( result1,pred.data0[,.(Id,Sales)] ) %>%
+    arrange(Id)
+  
+  return((result3))
 }
 
 work.glmnet.model.fun=function(test){
-
-	set.seed(100)
-	temp = work.train.data.fun( test )
-	train=temp[[1]]
-
-	train2 = train[,28:ncol(train),with=F]
-
-	#補na
-	set.seed(100)
-	fix.train2 = data.table( complete( 
-				mice( train2, m = 5,
-				defaultMethod = c("pmm","logreg"), maxit = 2 ) 
-				) )
-
-	sum( is.na(fix.train2) )
-	colnames(fix.train2)
-	x=fix.train2[,2:ncol(fix.train2),with=F]
-	y=train$log.sale
-	y2=train$Sales
-	ncol(x)
-	
-	model = 	glmnet(as.matrix(x) , y 
-		        ,family = c("poisson")
-		        ,alpha = 0.005
-		        ,nlambda = 5
-		        ,standardize = FALSE
-		        ,maxit=100000
-			    )
-
-	pred1<-predict(model, s=0, as.matrix(x), type="response")
-	pred1.log = exp( pred1 )-5
-
-	value1 = RMSPE(y2,pred1.log)
-	value1
-	return( list( model,value1) )
+  
+  set.seed(100)
+  temp = work.train.data.fun( test )
+  train = data.table( temp[[1]] )
+  
+  train2 = train[,28:ncol(train),with=F]
+  
+  #補na
+  set.seed(100)
+  fix.train2 = data.table( complete( 
+    mice( train2, m = 5,
+          defaultMethod = c("pmm","logreg"), maxit = 2 ) 
+  ) )
+  
+  sum( is.na(fix.train2) )
+  colnames(fix.train2)
+  x=fix.train2[,2:ncol(fix.train2),with=F]
+  y=train$log.sale
+  y2=train$Sales
+  ncol(x)
+  
+  model = 	glmnet(as.matrix(x) , y 
+                  ,family = c("poisson")
+                  ,alpha = 0.005
+                  ,nlambda = 5
+                  ,standardize = FALSE
+                  ,maxit=100000
+  )
+  
+  pred1<-predict(model, s=0, as.matrix(x), type="response")
+  pred1.log = exp( pred1 )-5
+  
+  value1 = RMSPE(y2,pred1.log)
+  value1
+  return( list( model,value1) )
 }
 
 
