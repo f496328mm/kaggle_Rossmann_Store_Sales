@@ -1,8 +1,8 @@
 # kaggle_Rossmann_Store_Sales
 
-( this is R code )
+(  R code )
 
-This code Score is kaggle NO.315, i will do better
+The rank is kaggle top 10% , NO.315 , i will do better
 
 https://www.kaggle.com/c/rossmann-store-sales
 
@@ -16,4 +16,4 @@ Fourth , run function before run main
 
 If any question , give me a message or others
 
-Thanks
+e-mail : samlin266118@gmail.com
