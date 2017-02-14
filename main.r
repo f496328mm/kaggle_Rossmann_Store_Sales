@@ -3,11 +3,11 @@
 	#install.packages("data.table")
 	#install.packages("xgboost")
 	#install.packages("snow")
-	#install.packages("xlsx")
 	#install.packages("glmnet")
 	#install.packages("dplyr")
 	#install.packages("moments")
 	#install.packages("mice")
+	#install.packages("xgboost", repos=c("http://dmlc.ml/drat/", getOption("repos")), type="source")
 
 	library(data.table)
 	library(xgboost)
