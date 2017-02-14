@@ -1,7 +1,6 @@
 
 
 	#install.packages("data.table")
-	#install.packages("xgboost")
 	#install.packages("snow")
 	#install.packages("glmnet")
 	#install.packages("dplyr")
