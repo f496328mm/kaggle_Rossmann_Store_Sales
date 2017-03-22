@@ -71,15 +71,15 @@ xgb.fun=function(train,test3,nro,eta=0.1,md=10,cb=0.5,start,ss,npt){
 
 	value1 = RMSPE(train$Sales,pred1.log)
 
-	pred2<-predict(clf,xgb.DMatrix(data.matrix(
-					test3[,c(start:ncol(test3)),with=FALSE]),
-					missing=NA))
-	pred2.log = exp( pred2 )
+	#pred2<-predict(clf,xgb.DMatrix(data.matrix(
+	#				test3[,c(start:ncol(test3)),with=FALSE]),
+	#				missing=NA))
+	#pred2.log = exp( pred2 )
 
-	pred2.log[pred2.log<0]=0
-	value2 = RMSPE(test3$Sales,pred2.log)
+	#pred2.log[pred2.log<0]=0
+	#value2 = RMSPE(test3$Sales,pred2.log)
 #--------------------------------------------------------------------------
-	return( list( c(value1,value2 ) , clf ) )
+	return( list( c(value1 ) , clf ) )
 }
 
 work.model.fun2=function(main.train.y,
