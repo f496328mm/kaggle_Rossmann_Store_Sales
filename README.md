@@ -1,8 +1,6 @@
-# kaggle_Rossmann_Store_Sales
+# kaggle Rossmann Store Sales, , top 10% , NO.315
 
 (  R code )
-
-The rank is kaggle top 10% , NO.315 , i will do better
 
 https://www.kaggle.com/c/rossmann-store-sales
 
