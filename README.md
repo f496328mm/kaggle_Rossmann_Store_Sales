@@ -1,4 +1,4 @@
-# kaggle Rossmann Store Sales, top 10% , NO.315
+# kaggle Rossmann Store Sales, NO.315/top 10%
 
 (  R code )
 
