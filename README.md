@@ -18,7 +18,7 @@
  # 2. 資料介紹
  Rossmann Store 位於歐洲七個國家，三千家連鎖藥妝店，以下是是該連鎖店一部分的分布圖
  
-  ![google map](https://github.com/f496328mm/kaggle_Rossmann_Store_Sales/blob/master/rossmann.jpg)
+  ![ross](https://github.com/f496328mm/kaggle_Rossmann_Store_Sales/blob/master/ross.jpg)
  
 基本上連鎖店都位於市中心，密集程度高，也代表著競爭對手的多寡。
 某些商店鄰近學校，因此特殊節慶，由於學校假日，可能導致銷售量下降。
@@ -43,17 +43,20 @@
  
  ### 2.1 資料準備 
  
- Kaggle 提供的資料如下：
- 
+Kaggle 提供的資料如下：
+
 |data|size|n (資料筆數)|p (變數數量)| 時間長度 |
-|----|----|-----------|------------|------|---------------|
+|----|----|-----------|------------|---------|
 |training data|36 MB|1 百萬 筆|14個類別變數，2個數值變數| 2013-01-01 ~ 2015-07-31  |
 |testing data|1 MB|4 萬 筆|14個類別變數，2個數值變數|2015-08-01 ~ 2015-09-17 |
 
 另外提供的 data - store ，包含 1 ~ 1115 家店的相關資訊，例如：StoreType 代表商店類別，有 a,b,c,d 四種。CompetitionDistance 代表最近對手商家的距離，其他細節可以參考 Kaggle 提供的資訊 [click](https://www.kaggle.com/c/rossmann-store-sales/data)。
 
  ### 2.2 資料切割
- 由於是時間序列問題，必須預測未來，因此資料切割方式，，，，，，，，，，，，，，，，，，。
+ 由於是時間序列問題，必須預測未來，因此資料切割方式，與前一篇[Grupo Bimbo Inventory Demand](https://github.com/f496328mm/kaggle_Grupo_Bimbo_Inventory_Demand)類似，切割方法如下：<br>
+  ![google map](https://github.com/f496328mm/kaggle_Grupo_Bimbo_Inventory_Demand/blob/master/bimbo.jpg)
+ 
+ ，，，，，，，，，，，，，，，，。
 
 # 3. 特徵製造
 ### 3.1 feature engineering 1 ( 特徵工程 1 )
