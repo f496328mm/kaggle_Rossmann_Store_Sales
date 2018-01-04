@@ -18,7 +18,7 @@
  # 2. 資料介紹
  Rossmann Store 位於歐洲七個國家，三千家連鎖藥妝店，以下是是該連鎖店一部分的分布圖
  
-  ![ross](https://github.com/f496328mm/kaggle_Rossmann_Store_Sales/blob/master/ross.jpg)
+  ![google map](https://github.com/f496328mm/kaggle_Rossmann_Store_Sales/blob/master/rossmann.jpg)
  
 基本上連鎖店都位於市中心，密集程度高，也代表著競爭對手的多寡。
 某些商店鄰近學校，因此特殊節慶，由於學校假日，可能導致銷售量下降。
@@ -54,7 +54,7 @@ Kaggle 提供的資料如下：
 
  ### 2.2 資料切割
  由於是時間序列問題，必須預測未來，因此資料切割方式，與前一篇[Grupo Bimbo Inventory Demand](https://github.com/f496328mm/kaggle_Grupo_Bimbo_Inventory_Demand)類似，切割方法如下：<br>
-  ![google map](https://github.com/f496328mm/kaggle_Grupo_Bimbo_Inventory_Demand/blob/master/bimbo.jpg)
+  ![ross](https://github.com/f496328mm/kaggle_Rossmann_Store_Sales/blob/master/ross.jpg)
  
  ，，，，，，，，，，，，，，，，。
 
